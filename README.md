@@ -1,6 +1,6 @@
 # 💻 Sistema de Gerenciamento de Usuários
 
-### Este projeto é uma aplicação web que gerencia usuários, permitindo o cadastro, visualização, edição e exclusão de nomes de usuários, essa atividade foi proposta pelo docente [Leonardo Rocha](https://github.com/LeonardoRochaMarista/LeonardoRochaMarista) na materia de Programação Web 1. Abaixo estão as funcionalidades e propósitos detalhados do projeto:
+### Este projeto é uma aplicação web que gerencia usuários, permitindo o cadastro, visualização, edição e exclusão de nomes de usuários, essa atividade foi proposta pelo docente [Leonardo Rocha](https://github.com/LeonardoRochaMarista) na materia de Programação Web 1. Abaixo estão as funcionalidades e propósitos detalhados do projeto:
 
 <br>
 ------------------------------------------------------------------------------------------------------------------
