@@ -102,6 +102,7 @@ function excluir(i){
 |------------|------|
 |    HTML5   | Marcação |
 |   JavaScript | Programação |
+|   Bootstrap 5 | Framework de estilização |
 
 
 <br>
