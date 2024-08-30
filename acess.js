@@ -1,83 +1,61 @@
-// FUNÇÃO PARA EDITAR UM NOME DA LISTA
-function editar(i) {
-    document.getElementById('nomeUser').value = dadosLista[(i - 1)];
-    // Ele busca no HTML o campo "nomeUser" com o valor da lista correspondendo ao índice i-1
-    dadosLista.splice(dadosLista[(i - 1)], 1);
-    // Remove o item da lista no índice i-1
-
-}
+// validar o acesso ao login
+// ----------------------------------------------------------------------------------------------------------------------------
+function acessar(){
+    let loginEmail = document.getElementById('loginEmail').value;
+    let loginSenha = document.getElementById('loginSenha').value;
  
-// FUNÇÃO PARA VALIDAÇÃO DE ACESSO
-function acessar() {
-        // Obtém o valor do campo de e-mail
-        let loginEmail = document.getElementById('loginEmail').value;
-        // Obtém o valor/produto do campo de e-mail
-        let loginSenha = document.getElementById('loginSenha').value;
-        // Obtém o valor do campo de senha
-        if (!loginEmail || !loginSenha) {
-        // Para verificar se os campos de e-mail e senha estão preenchidos
-
-            alert("Favor preencher todos os campos");
-        // Exibe um alerta se algum dos campos estiver vazio
-
-        } else {
-            window.location.href = 'cadastro.html';
-            // manda para a página de cadastro se os campos estiverem preenchidos
-        }
-    }
+       if(!loginEmail || !loginSenha){
+          alert('favor preencher todos os campos');
  
-// ARRAY PARA ARMAZENAR NOMES DE USUÁRIOS
-var dadosLista = [];
+       }else{
+        // else{ alert('campos preenchisdos com sucesso'); }
+        window.location.href = 'cadastro.html'
+       }
+ }
  
-// FUNÇÃO PARA SALVAR UM NOME NO ARRAY E ATUALIZAR A LISTA
+ // FUNÇÃO PARA ARMAZENAMENTO DE NOMES EM ARRAY
+ //------------------------------------------------------------------------------------------------------------------------
+ var dadosLista = [];
+ 
+// Função para salvar usuário e e-mail
 function salvarUser() {
     let nomeUser = document.getElementById('nomeUser').value;
-    // pega o valor do campo 'nomeUser'
-    
-    if (nomeUser) {
-        // Verifica se o nome não está vazio
-        dadosLista.push(nomeUser);
-        // Adiciona o nome na minha array 'dadosLista' com push
-        
-        criaLista();
-        
+    let emailUser = document.getElementById('EmailUser').value;
+   //  Coloquei as duas funções juntas para que com isso eu possa utilizar as duas ao mesmo tempo
+ 
+    if (nomeUser && emailUser) {
+        dadosLista.push({ nome: nomeUser, email: emailUser });
+        criarLista();
         document.getElementById('nomeUser').value = "";
-        // Limpa o campo após o salvamento
+        document.getElementById('EmailUser').value = ""; //aqui o o codigo vai pegar o id do input dos dois ao mesmo tempo, assim economiza tempo e espaço
     } else {
-        
-        alert("Favor informe um nome para cadastro");
-        // Exibe um alerta se o nome estiver vazio
+        alert('Por favor, informe um nome e um e-mail para cadastro.'); //alerta para quando não estiver nada escrito, escreva.
     }
+   //  como eu coloquei as funções juntas la em cima, agora as duas são chamadas juntas e agora  e precios digitar o nome e o email do usuario
 }
  
-// FUNÇÃO PARA CRIAR E EXIBIR A LISTA DE USUÁRIOS
-function criaLista() {
-    let tabela = document.getElementById('tabela').innerHTML = "<tr><th>Nome Usuário</th><th>Ações</th></tr>";
-    // Inicia a tabela com o cabeçalho
- 
-    for (let i = 0; i <= (dadosLista.length - 1); i++) {
-           // Itera sobre o array 'dadosLista' para preencher a tabela
-        tabela += "<tr><td>" + dadosLista[i] + "</td><td><button type='button' onclick='editar(parentNode.parentNode.rowIndex)'>Editar</button><button type='button' onclick='excluir(parentNode.parentNode.rowIndex)'>Excluir</button></td></tr>";
-          // Adiciona uma nova linha na tabela para cada usuário
-        document.getElementById('tabela').innerHTML = tabela;
-          // Atualiza o conteúdo da tabela no HTML
+// Função para criar e atualizar a lista de usuários
+function criarLista() {
+    let tabela = "<tr><th>Nome Usuario</th><th>Email</th><th>Ações</th></tr>";
+    for (let i = 0; i < dadosLista.length; i++) {
+        tabela += "<tr><td>" + dadosLista[i].nome + "</td><td>" + dadosLista[i].email + "</td>" +
+                  "<td><button type='button' onclick='editar(" + i + ")'>Editar</button>" +
+                  "<button type='button' onclick='excluir(" + i + ")'>Excluir</button></td></tr>";
     }
+    document.getElementById('tabela').innerHTML = tabela;
 }
+// Aqui eu atualizei para que o codigo possa colocar oque esta no input na tabela, assim ficando organizado no site e no lugar certo
  
-// FUNÇÃO PARA EDITAR NOMES NA LISTA
+// Função para editar dados de usuário
 function editar(i) {
-    document.getElementById('nomeUser').value = dadosLista[(i - 1)];
-     // Preenche o campo 'nomeUser' com o nome a ser editado, usando o índice i-1
-    dadosLista.splice(dadosLista[(i - 1)], 1);
-     // Remove o nome da lista, preparando para a edição
+    document.getElementById('nomeUser').value = dadosLista[i].nome;
+    document.getElementById('EmailUser').value = dadosLista[i].email;
+    dadosLista.splice(i, 1); // Remove o item para que possa ser atualizado
+   criarLista(); //Atualiza a tabela após a exclusão
 }
  
-// FUNÇÃO PARA EXCLUIR UM NOME DA LISTA
+// Função para excluir dados de usuário
 function excluir(i) {
-    dadosLista.splice((i - 1), 1)
-     // Remove o nome do array 'dadosLista' usando o índice i-1;
-    document.getElementById('tabela').deleteRow(i);
-      // Remove a linha correspondente na tabela HTML
+    dadosLista.splice(i, 1);
+    criarLista(); // Atualiza a tabela após a exclusão
 }
-
- 
